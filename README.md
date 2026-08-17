@@ -16,9 +16,31 @@ With these preliminary results **I aim to highlight to reviewers a novel pipelin
 
 ## Methods:
 
+### Multi-trait IR-fat distribution associations
 
+We used GWAS summary statistics for TG/HDL (n = 402,398) and BMI- and height-adjusted MRI-derived measures of ASAT, GSAT, VAT [4], liver fat, and thigh muscle fat infiltration [5] (nmax = 38,965). We utilized BMI- and height-addjusted GWAS to identify loci influencing body fat distribution independent of overall adiposity. We then applied the PLACO+ a pairwise multi-trait framework [6] to identify loci jointly associated between TG/HDL and each MRI-derived fat volume trait. In PLACO+, the null hypothesis assumes that the variant affects at most one trait, while the alternative hypothesis is that the variant contributes to variation in both traits, providing evidence for a shared genetic mechanism.
+
+To maximize discovery while ensuring robustness, loci were required to meet three criteria: (i) association with TG/HDL at P < 5 × 10⁻⁵, (ii) association with the fat depot trait at P < 0.05, and (iii) genome-wide significant evidence of joint association from PLACO+ (P < 5 × 10⁻⁸). This approach increases power to detect shared genetic determinants while minimizing the inclusion of false-positive signals driven by a single trait.
+
+### LD-based identification of independent loci
+
+To identify independent IR-associated loci, we performed linkage disequilibrium (LD) clumping using the ld_clump_local() function implemented in the ieugwasr package [X]. The function utilizes PLINK v1.9 [X] to identify approximately independent association signals based on pairwise LD. LD was estimated using the European ancestry reference panel from the 1000 Genomes Project Phase 3 release (version 5), consisting of 503 individuals [X]. Clumping analyses were restricted to TG/HDL variants that satisfied the multi-trait association criteria described above. LD clumping was performed using an LD threshold of r² < 0.01 and a clumping window of ±1 Mb (1,000 kb).
+
+### Identifying IR subgroups with distinct effects on fat distirbution
+
+We applied the NavMix hard-clustering algorithm to all independent TG/HDL loci that showed evidence of joint association with at least one fat volume trait (PLACO+ P < 5 × 10⁻⁸). For each locus, effect estimates for ASAT, GSAT, VAT, liver fat, and thigh muscle fat infiltration were aligned to the TG/HDL-increasing allele and converted to z-scores. NavMix utilizes these standardized effect estimates to identify clusters of variants with similar association profiles while accounting for both the magnitude and direction of effects across traits. Loci exhibiting comparable patterns of fat distribution were therefore grouped into the same cluster. To distinguish loci characterized primarily by their fat distribution profile from those whose clustering might be driven by strong TG/HDL associations, we additionally included TG/HDL z-scores in the clustering framework. This approach was intended to mitigate the potential influence of large differences in statistical power between TG/HDL and imaging-derived phenotypes, which can affect the interpretation of multi-trait association results. The number of clusters was determined automatically by NavMix according to its model selection procedure. All remaining clustering parameters were left at their default settings.
+
+### Validation of IR subgroup associations
+
+To validate whether the identified IR subgroups were associated with insulin resistance and distinct fat distribution patterns, we performed polygenic risk score (PRS) analyses using the grs.summary() function from the gtx package (version 0.0.8). This function estimates the aggregate genetic effect of a set of variants on an outcome trait using GWAS summary statistics, providing a summary-statistics-based approximation of a PRS. As the exposure, we used all independent TG/HDL-increasing lead variants within each IR subgroup. As outcomes, we utilized GWAS summary statistics for 4 glycemic traits and 7 anthropometric and fat distribution traits [X, X, X, X]. Associations were aligned to the TG/HDL-increasing allele such that positive effect estimates reflected a higher genetic burden of the corresponding IR subgroup
+
+### Enrichment analyses: 
+
+To investigate the biological mechanisms underlying the identified IR subgroups, we performed functional enrichment analyses following the approach described by Lotta et al. [X]. This method assesses whether a set of loci overlaps a given functional annotation more frequently than expected by chance using a binomial test-based framework. Specifically, the observed overlap between loci of interest and a functional annotation is compared against the overlap observed for matched sets of independent loci with similar genomic characteristics. Matching is performed on locus size, proxy variant density, and distance to the nearest gene transcription start site (TSS), thereby accounting for potential confounding due to genomic architecture. Using this framework, we tested whether each IR subgroup was enriched for active enhancer regions defined by the 15-state chromatin model across 98 ROADMAP Epigenomics tissues and cell types [X]. We additionally evaluated enrichment within differentially accessible chromatin regions derived from adipose tissue and SGBS adipocyte differentiation experiments, including day 0 (preadipocytes), day 4 (immature adipocytes), and day 14 (mature adipocytes), as well as regions exhibiting greater chromatin accessibility in VAT relative to SAT and in SAT relative to VAT [REF]. Statistical significance was assessed using 1 million matched permutations. Enrichment was considered significant when the Benjamini-Hochberg (BH) false discovery rate-corrected P-value was < 0.05.
 
 ## Results:
+
+To identify subgroups of IR loci with distinct effects on fat distirbution 
 
 ## Discussion:
 
