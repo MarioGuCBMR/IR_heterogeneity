@@ -12,6 +12,7 @@ The largest subgroup (122 loci) displayed the classical signature of impaired ad
 ### Figure 1: PRS associations for IR subgroups at 300 TG/HDL-independent loci with anthropometric and glycemic traits
 
 ![PRS results for TG/HDL subclusters](https://raw.githubusercontent.com/MarioGuCBMR/IR_heterogeneity/main/figures/prs_results_tg_hdl_subcluster.svg)
+
 ### Figure 2: Regulatory enrichment across IR subgroups at 300 TG/HDL-independent loci in ROADMAP enhancers and adipose/SGBS ATAC-seq peaks.
 
-
+![Enrichment results for TG/HDL subclusters](https://github.com/MarioGuCBMR/IR_heterogeneity/blob/main/figures/enrichment_tg_hdl_clusters_active_enhancer.svg)
